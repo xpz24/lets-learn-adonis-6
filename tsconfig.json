@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@adonisjs/tsconfig/tsconfig.app.json",
+  "compilerOptions": {
+    "useUnknownInCatchVariables": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "rootDir": "./",
+    "outDir": "./build",
+    "baseUrl": ".",
+    "paths": {
+      "#utils/*": ["./utils/*"],
+      "#types/*": ["./types/*"]
+    }
+  }
+}

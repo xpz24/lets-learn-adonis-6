@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Movie List
+    </title>
+    @include('partials/fonts/instrument-sans')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+  </head>
+
+  <body>
+    @include('partials/header')
+    <main>
+      <h1>
+        Available Movies
+      </h1>
+      <ol>
+        @each(movie in movies)
+          <li>
+            <strong>Title: </strong>
+            <a href="{{ route('movies.show', { slug: movie.slug }) }}">
+              {{ movie.title }}
+            </a>
+            <br />
+            <strong>Summary: </strong>{{ movie.summary }}<br />
+          </li>
+        @end
+      </ol>
+      {{ inspect(movies) }}
+    </main>
+  </body>
+
+</html>
