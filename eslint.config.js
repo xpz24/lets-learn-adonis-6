@@ -2,15 +2,16 @@ import { configApp, RULES_LIST, IGNORE_LIST, INCLUDE_LIST } from '@adonisjs/esli
 import tseslint from 'typescript-eslint'
 import eslint from '@eslint/js'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
+import globals from 'globals'
 
-const keysToRemove = ['unicorn/expiring-todo-comments']
+const keysToRemove = ['']
 const customDefaultRules = {
-  '@unicorn/prevent-abbreviations': [
+  'unicorn/prevent-abbreviations': [
     'error',
     {
       allowList: {
         env: true,
-        ctx: true
+        ctx: true,
       },
     },
   ],
@@ -22,34 +23,33 @@ const unicornRecommendedRules = extractRules([eslintPluginUnicorn.configs['flat/
 const strictTypeCheckedRules = extractRules(tseslint.configs.strictTypeChecked)
 const stylisticTypeCheckedRules = extractRules(tseslint.configs.stylisticTypeChecked)
 
-const customConfigObject =
-  {
-    name: 'Custom Config',
-    languageOptions: {
-      /*  globals: {
-        ...globals.builtin,
-        ...globals.nodeBuiltin,
-        ...globals.browser,
-        ...globals.node,
-      }, */
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
+const customConfigObject = {
+  name: 'Custom Config',
+  languageOptions: {
+    globals: {
+      ...globals.builtin,
+      ...globals.nodeBuiltin,
+      ...globals.browser,
+      ...globals.node,
     },
-    files: [...INCLUDE_LIST, '**/*.tsx', '**/*.mts', '**/*.cts'],
-    ignores: [...IGNORE_LIST],
-    rules: deepMerge(
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    parserOptions: {
+      projectService: true,
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+  files: [...INCLUDE_LIST, '**/*.tsx', '**/*.mts', '**/*.cts'],
+  ignores: [...IGNORE_LIST],
+  rules: deepMerge(
     eslintRecommendedRules,
-    modifyUnicornKeys(unicornRecommendedRules, keysToRemove),
+    unicornRecommendedRules,
     strictTypeCheckedRules,
     stylisticTypeCheckedRules,
     modifyUnicornKeys(RULES_LIST),
-    customDefaultRules,
-    )
-  }
+    customDefaultRules
+  ),
+}
 
 function extractRules(configObjectsList) {
   const rulesObjects = configObjectsList
@@ -67,8 +67,9 @@ function modifyUnicornKeys(unicornRuleObject, keysToRemove = undefined) {
         if (keysToRemove && keysToRemove.includes(key)) {
           return undefined
         }
-        if (key.startsWith('unicorn')) {
-          return [`@${key}`, value]
+        if (key.startsWith('@unicorn')) {
+          //return [`@${key}`, value]
+          return [key.slice(1), value]
         }
         return [key, value]
       })
@@ -95,7 +96,11 @@ function deepMerge(...objects) {
 
 const mergedDefaultConfig = deepMerge(...configApp())
 mergedDefaultConfig.rules = modifyUnicornKeys(mergedDefaultConfig.rules)
+delete mergedDefaultConfig.plugins['@unicorn']
+mergedDefaultConfig.plugins.unicorn = eslintPluginUnicorn
 
 const mergedConfig = deepMerge(mergedDefaultConfig, customConfigObject)
 
+// console.dir(mergedConfig, {depth: 1})
+// console.log(unicornRecommendedRules)
 export default [mergedConfig]
