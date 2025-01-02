@@ -33,9 +33,8 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    * The method is used for handling errors and returning
    * response to the client
    */
-  async handle(error: unknown, context: HttpContext) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return super.handle(error, context)
+  async handle(error: unknown, ctx: HttpContext) {
+    return super.handle(error, ctx)
   }
 
   /**
@@ -44,7 +43,7 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    *
    * @note You should not attempt to send a response from this method.
    */
-  async report(error: unknown, context: HttpContext) {
-    return super.report(error, context)
+  async report(error: unknown, ctx: HttpContext) {
+    return super.report(error, ctx)
   }
 }

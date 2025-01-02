@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Movie List
+    </title>
+    @include('partials/fonts/instrument-sans')
+    @vite(['resources/css/app.css', 'resources/css/pages/movies/list.css', 'resources/js/app.js'])
+  </head>
+
+  <body>
+    @include('partials/header')
+    <main>
+      <h1>
+        Available Movies
+      </h1>
+
+      <div class="movie-grid items-center">
+        @each(movie in movies)
+          @!movies.card({ movie })
+        @end
+      </div>
+
+      <ol>
+        @each(movie in movies)
+          <li>
+            <strong>Title: </strong>
+            <a href="{{ route('movies.show', { slug: movie.slug }) }}">
+              {{ movie.title }}
+            </a>
+            <br />
+            <strong>Summary: </strong>{{ truncate(movie.summary, 25, { completeWords: true }) }}<br />
+          </li>
+        @end
+      </ol>
+
+      <form action="{{ route('redis.flush') }}" method="post">
+        {{ csrfField() }}
+        <div class="redis-button-container">
+          @button({ type: 'submit', class: ['redis-buttons']})
+            @svg('ph:trash-fill')
+            Flush RedisDb
+          @end
+        </div>
+      </form>
+      {{-- {{ inspect(movies) }} --}}
+
+    </main>
+  </body>
+
+</html>

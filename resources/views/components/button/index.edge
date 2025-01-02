@@ -1,0 +1,13 @@
+@vite(['resources/css/components/button/index.css'])
+
+@let(
+  attributes = $props.mergeUnless(removeExistingStyles, { class: ['component-button'] })
+  .except([removeExistingStyles])
+  .toAttrs()
+)
+
+@let(nodeName = $props.has('href') ? 'a' : 'button')
+
+<{{ nodeName }} {{ attributes }}>
+  {{{ await $slots.main() }}}
+</{{ nodeName }}>

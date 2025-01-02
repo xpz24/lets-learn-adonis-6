@@ -1,5 +1,9 @@
 import { defineConfig } from 'vite'
 import adonisjs from '@adonisjs/vite/client'
+import browserslist from 'browserslist'
+import { resolveToEsbuildTarget } from 'esbuild-plugin-browserslist'
+
+const targets = resolveToEsbuildTarget(browserslist(), { printUnknownTargets: false })
 
 export default defineConfig({
   plugins: [
@@ -16,4 +20,7 @@ export default defineConfig({
       reload: ['resources/views/**/*.edge'],
     }),
   ],
+  build: {
+    target: targets,
+  },
 })

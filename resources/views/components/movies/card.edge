@@ -1,0 +1,28 @@
+@vite(['resources/css/components/movies/card.css'])
+
+<div class="movie-card-border">
+  <div class="movie-image-container">
+    <img
+      src="https://picsum.photos/200?v={{ movie.slug }}"
+      loading="lazy"
+      alt="{{ movie.slug }}"
+      class="movie-image"
+    />
+  </div>
+  <div class="movie-text-container">
+    <h2 class="movie-title">
+      {{ movie.title }}
+    </h2>
+    <p class="movie-summary">
+      {{ truncate(movie.summary, 50, { completeWords: true }) }}
+    </p>
+    @button({
+      removeExistingStyles: false,
+      href: route('movies.show', { slug: movie.slug }) ,
+      class: ['movie-button']
+    })
+      View Movie
+    @end
+  </div>
+</div>
+

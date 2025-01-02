@@ -19,7 +19,7 @@ export function verifyObjectType<T>(object: unknown, keys: (keyof T)[]): asserts
 }
 
 export function deepMerge(...objects: Record<string, unknown>[]) {
-  // eslint-disable-next-line @unicorn/no-array-reduce
+  // eslint-disable-next-line unicorn/no-array-reduce
   return objects.reduce((mergedObject, currentObject) => {
     for (const [key, value] of Object.entries(currentObject)) {
       mergedObject[key] =

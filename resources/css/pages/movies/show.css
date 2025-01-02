@@ -1,0 +1,12 @@
+.movie-description {
+  max-inline-size: 50%;
+  padding: 1.875rem;
+  margin-block: 1rem;
+  margin-inline-start: 0.625rem;
+  background-color: rgb(6 21 38);
+  border-radius: 0.625rem;
+
+    @media (prefers-color-scheme: light) {
+      background-color: lightskyblue;
+    }
+}

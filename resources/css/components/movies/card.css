@@ -1,0 +1,47 @@
+.movie-card-border {
+  position: relative;
+  display: block flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-color: rgb(156 163 175 / 50%);
+  border-width: 0.125rem;
+  border-radius: 0.75rem;
+  transition: box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 0.125rem 0.125rem rgb(209 213 219 / 20%);
+  }
+
+  & .movie-image-container {
+    position: relative;
+
+    & .movie-image {
+      inline-size: 100%;
+      block-size: auto;
+      object-fit: cover;
+    }
+  }
+
+  & .movie-text-container {
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.75rem;
+
+    & .movie-title {
+      margin-block-end: 0.125rem;
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    & .movie-summary {
+      margin-block-end: 1.25rem;
+    }
+
+    & .movie-button {
+      margin-block-start: auto;
+    }
+  }
+}

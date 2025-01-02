@@ -13,7 +13,7 @@
       rel="stylesheet"
     />
     @include('partials/fonts/instrument-sans')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/css/pages/movies/show.css', 'resources/js/app.js'])
   </head>
   <body>
     @include('partials/header')
@@ -21,9 +21,13 @@
       <h1 class="movie-title">
         {{ movie.title }}
       </h1>
-      <div class="movie-description">
-        {{{ movie.abstract }}}
-      </div>
+      @if (movie.abstract)
+        <div class="movie-description">
+          {{{ movie.abstract }}}
+        </div>
+      @else
+        No Abstract
+      @endif
       {{ inspect(movie) }}
     </main>
   </body>

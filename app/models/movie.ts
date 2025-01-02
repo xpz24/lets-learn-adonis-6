@@ -1,4 +1,4 @@
-import type { MovieFrontMatter } from '#types/movie'
+import type { MovieFrontMatter } from '@typings/movie.js'
 import cache from '#services/cache_service'
 
 export default class Movie {
@@ -8,7 +8,7 @@ export default class Movie {
 
   declare slug: string
 
-  declare abstract: string
+  declare abstract?: string
 
   static getSlug(filename: string): string {
     if (!filename.endsWith('.md')) {

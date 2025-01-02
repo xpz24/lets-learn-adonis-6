@@ -2,9 +2,9 @@ import MovieService from '#services/movie_service'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class MoviesController {
-  async index({ view }: HttpContext) {
+  async list({ view }: HttpContext) {
     const movies = await MovieService.getMovieList('resources/movies')
-    return await view.render('pages/movies/index', { movies })
+    return await view.render('pages/movies/list', { movies })
   }
 
   async show({ view, params }: HttpContext) {

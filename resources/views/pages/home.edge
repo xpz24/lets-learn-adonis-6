@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -66,7 +66,7 @@
       };
     </script>
 
-    @vite(['resources/css/home.css', 'resources/js/app.js'])
+    @vite(['resources/css/pages/home.css', 'resources/js/app.js'])
   </head>
   <body class="min-h-screen w-screen font-sans">
     <div
@@ -89,7 +89,7 @@
         <span>
           <a href="{{ route('home') }}" class="isolate">Home</a>
           |
-          <a href="{{ route('movies.index') }}" class="isolate">Movies</a>
+          <a href="{{ route('movies.list') }}" class="isolate">Movies</a>
         </span>
       </div>
 

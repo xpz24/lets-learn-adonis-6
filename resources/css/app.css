@@ -73,9 +73,3 @@ main {
     }
   }
 }
-
-.movie-description {
-  max-inline-size: 50%;
-  margin-block: 1rem;
-  margin-inline-start: 0.625rem;
-}

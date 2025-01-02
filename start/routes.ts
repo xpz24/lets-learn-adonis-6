@@ -14,7 +14,7 @@ const MoviesController = () => import('#controllers/movies_controller')
 const SLUG_REGEX = /^[\da-z]+(?:-[\da-z]+)*$/
 router.on('/').render('pages/home').as('home')
 
-router.get('/movies', [MoviesController, 'index']).as('movies.index')
+router.get('/movies', [MoviesController, 'list']).as('movies.list')
 
 router.get('/movies/:slug', [MoviesController, 'show']).as('movies.show').where('slug', SLUG_REGEX)
 

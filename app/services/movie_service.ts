@@ -3,7 +3,7 @@ import markToHtml from '#utils/markdown_to_html'
 import app from '@adonisjs/core/services/app'
 import customErrorHandler from '#utils/error_helper'
 import Movie from '#models/movie'
-import type { MovieFrontMatter } from '#types/movie'
+import type { MovieFrontMatter } from '@typings/movie'
 import cache from '#services/cache_service'
 import { verifyObjectType } from '#utils/others'
 
@@ -38,7 +38,7 @@ export default class MovieService {
     if (await cache.has(slug)) {
       const cachedMovie = await cache.get(slug)
       verifyObjectType<Movie>(cachedMovie, this.#keysOfMovie)
-      console.log(`Cache hit: ${slug}`)
+      // console.log(`Cache hit: ${slug}`)
       return cachedMovie
     }
     const url = app.makeURL(`resources/movies/${slug}.md`)
