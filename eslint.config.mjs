@@ -74,7 +74,7 @@ mergedConfig.settings = resolverNext
 // Remove rules if required
 mergedConfig.rules = removeRules(mergedConfig.rules, keysToRemove)
 
-// console.dir(mergedConfig.plugins, {depth: 1})
+// console.dir(mergedConfig, {depth: 1})
 export default [mergedConfig]
 
 // Helper Functions

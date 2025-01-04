@@ -1,4 +1,4 @@
-import type { MovieFrontMatter } from '@typings/movie.js'
+import type { MovieFrontMatter } from '@typings/movie'
 import cache from '#services/cache_service'
 
 export default class Movie {
