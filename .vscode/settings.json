@@ -1,0 +1,92 @@
+{
+  "files.exclude": {
+    "node_modules": false,
+    "package.json": false,
+    "**/package-lock.json": false,
+    "eslint.config.mjs": false,
+    ".vscode": false,
+    ".git": false,
+    ".gitignore": false,
+    ".htmlvalidate.json": false,
+    "jsconfig.json": false,
+    "prettier.config.mjs": false,
+    "stylelint.config.mjs": false,
+    "vite.config.ts": false,
+    "tsconfig.json": false,
+    "postcss.config.js": false,
+    "tailwind.config.js": false,
+    ".editorconfig": false,
+    ".env": false,
+    ".env.example": false,
+    "ace.js": false,
+    "adonisrc.ts": false
+  },
+  "cSpell.words": [
+    "Adocasts",
+    "battteries",
+    "Bento",
+    "bodyparser",
+    "Cantarell",
+    "cineasts",
+    "csrf",
+    "edgejs",
+    "evenodd",
+    "frontmatter",
+    "headshot",
+    "ianvs",
+    "iconify",
+    "Iconify",
+    "Ignitor",
+    "isnotdefined",
+    "linecap",
+    "linejoin",
+    "mavrin",
+    "mdast",
+    "Neue",
+    "Playwrighht",
+    "preconnect",
+    "redis",
+    "Roboto",
+    "Segoe",
+    "stylesheet",
+    "tseslint",
+    "uids",
+    "vfile",
+    "vite"
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "css.validate": false, // These should be workspace settings
+  "less.validate": false,
+  "scss.validate": false,
+  "javascript.preferences.importModuleSpecifierEnding": "auto",
+  "typescript.preferences.importModuleSpecifierEnding": "auto",
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "adonis6",
+      "group": "pg17",
+      "database": "adonis6",
+      "username": "postgres"
+    },
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "library",
+      "database": "library",
+      "username": "postgres",
+      "group": "pg17"
+    }
+  ]
+  // "typescript.validate.enable": false, // Disable TypeScript's built-in checker
+  // "javascript.validate.enable": false,
+}

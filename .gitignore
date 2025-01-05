@@ -4,10 +4,10 @@ build
 tmp
 
 # Secrets
-.env
-.env.local
-.env.production.local
-.env.development.local
+# .env
+# .env.local
+# .env.production.local
+# .env.development.local
 
 # Frontend assets compiled code
 public/assets
@@ -19,7 +19,7 @@ yarn-error.log
 # Editors specific
 .fleet
 .idea
-.vscode
+# .vscode
 
 # Platform specific
 .DS_Store
