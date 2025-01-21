@@ -5,9 +5,13 @@
  * @type {import("prettier").Config}
  */
 export default {
-  plugins: ['@ianvs/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss', 'prettier-edgejs'],
-  // singleQuote: true,
-  // printWidth: 100,
-  // semi: false,
-  // trailingComma: 'all',
+  trailingComma: "es5",
+  semi: false,
+  singleQuote: true,
+  useTabs: false,
+  quoteProps: "consistent",
+  bracketSpacing: true,
+  arrowParens: "always",
+  printWidth: 100,
+  plugins: ['@ianvs/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss', 'prettier-edgejs', 'prettier-plugin-sh'],
 }
