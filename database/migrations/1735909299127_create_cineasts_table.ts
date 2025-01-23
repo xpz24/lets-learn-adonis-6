@@ -11,10 +11,10 @@ export default class extends BaseSchema {
 
       table.string('first_name', 100).notNullable()
       table.string('last_name', 100).notNullable()
-      table.string('headshot_url', 255).notNullable().defaultTo('')
+      table.string('headshot_url', 255).nullable()
 
-      table.timestamp('created_at')
-      table.timestamp('updated_at')
+      table.timestamp('created_at').notNullable()
+      table.timestamp('updated_at').nullable()
     })
   }
 

@@ -12,10 +12,11 @@ export default class extends BaseSchema {
       table
         .integer('role_id')
         .unsigned()
+        .notNullable()
         .references('id')
         .inTable('roles')
-        .notNullable()
         .defaultTo(1)
+
       table.string('full_name').nullable()
       table.string('avatar_url', 255).nullable()
       table.string('email', 254).notNullable().unique()

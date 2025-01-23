@@ -8,15 +8,16 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
+      
+      table.integer('status_id').unsigned().notNullable().references('id').inTable('movie_statuses')
+      table.integer('writer_id').unsigned().notNullable().references('id').inTable('cineasts')
+      table.integer('director_id').unsigned().notNullable().references('id').inTable('cineasts')
 
-      table.integer('status_id').unsigned().references('id').inTable('movie_statuses').notNullable()
-      table.integer('writer_id').unsigned().references('id').inTable('cineasts').notNullable()
-      table.integer('director_id').unsigned().references('id').inTable('cineasts').notNullable()
       table.string('title', 100).notNullable()
       table.string('slug', 200).notNullable().unique()
-      table.string('summary', 255).notNullable().defaultTo('')
+      table.string('summary', 255).notNullable()
       table.text('abstract')
-      table.string('poster_url', 255).notNullable().defaultTo('')
+      table.string('poster_url', 255).nullable()
       table.timestamp('released_at').nullable()
 
       table.timestamp('created_at').notNullable()
