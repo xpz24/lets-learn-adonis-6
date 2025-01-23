@@ -1,5 +1,8 @@
 import fs from 'node:fs/promises' // for node
 import url from 'node:url'
+import remarkExtractFrontmatter from '#utils/frontmatter_parser'
+import { verifyObjectType } from '#utils/others'
+import rehypeFormat from 'rehype-format'
 import rehypeSanitize from 'rehype-sanitize'
 import rehypeSlug from 'rehype-slug'
 import rehypeStringify from 'rehype-stringify'
@@ -9,9 +12,6 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import remarkToc from 'remark-toc'
 import { unified } from 'unified'
-import remarkExtractFrontmatter from '#utils/frontmatter_parser'
-import rehypeFormat from 'rehype-format'
-import { verifyObjectType } from '#utils/others'
 
 interface Options<T> {
   callerDirectory?: string
