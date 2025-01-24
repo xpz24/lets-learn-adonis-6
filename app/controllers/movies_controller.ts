@@ -1,5 +1,5 @@
-import MovieService from '#services/movie_service'
 import type { HttpContext } from '@adonisjs/core/http'
+import MovieService from '#services/movie_service'
 
 export default class MoviesController {
   async list({ view }: HttpContext) {

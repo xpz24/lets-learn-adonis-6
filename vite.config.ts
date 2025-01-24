@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
 import adonisjs from '@adonisjs/vite/client'
 import browserslist from 'browserslist'
 import { resolveToEsbuildTarget } from 'esbuild-plugin-browserslist'
+import { defineConfig } from 'vite'
 
 const targets = resolveToEsbuildTarget(browserslist(), { printUnknownTargets: false })
 

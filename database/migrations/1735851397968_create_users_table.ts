@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable unicorn/no-anonymous-default-export */
 import { BaseSchema } from '@adonisjs/lucid/schema'
+import Roles from '#enums/roles'
 
 export default class extends BaseSchema {
   protected tableName = 'users'
@@ -15,7 +16,7 @@ export default class extends BaseSchema {
         .notNullable()
         .references('id')
         .inTable('roles')
-        .defaultTo(1)
+        .defaultTo(Roles.USER)
 
       table.string('full_name').nullable()
       table.string('avatar_url', 255).nullable()
@@ -23,7 +24,7 @@ export default class extends BaseSchema {
       table.string('password').notNullable()
 
       table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').nullable()
+      table.timestamp('updated_at').notNullable()
     })
   }
 

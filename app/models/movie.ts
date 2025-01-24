@@ -1,14 +1,44 @@
+import { DateTime } from 'luxon'
+import { BaseModel, column } from '@adonisjs/lucid/orm'
 import type { MovieFrontMatter } from '@typings/movie'
 import cache from '#services/cache_service'
 
-export default class Movie {
+export default class Movie extends BaseModel {
+  @column({ isPrimary: true })
+  declare id: number
+
+  @column()
+  declare statusId: number
+
+  @column()
+  declare writerId: number
+
+  @column()
+  declare directorId: number
+
+  @column()
   declare title: string
 
-  declare summary: string
-
+  @column()
   declare slug: string
 
-  declare abstract?: string
+  @column()
+  declare summary: string
+
+  @column()
+  declare abstract: string
+
+  @column()
+  declare posterUrl: string | null
+
+  @column.dateTime()
+  declare releasedAt: DateTime | null
+
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
 
   static getSlug(filename: string): string {
     if (!filename.endsWith('.md')) {

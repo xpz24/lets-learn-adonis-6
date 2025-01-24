@@ -6,7 +6,7 @@
   background-color: rgb(6 21 38);
   border-radius: 0.625rem;
 
-    @media (prefers-color-scheme: light) {
-      background-color: lightskyblue;
-    }
+  @media (prefers-color-scheme: light) {
+    background-color: lightskyblue;
+  }
 }

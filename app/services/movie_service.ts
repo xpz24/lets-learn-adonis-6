@@ -1,10 +1,10 @@
 import fs from 'node:fs/promises'
-import markToHtml from '#utils/markdown_to_html'
 import app from '@adonisjs/core/services/app'
-import customErrorHandler from '#utils/error_helper'
-import Movie from '#models/movie'
 import type { MovieFrontMatter } from '@typings/movie'
+import Movie from '#models/movie'
 import cache from '#services/cache_service'
+import customErrorHandler from '#utils/error_helper'
+import markToHtml from '#utils/markdown_to_html'
 import { verifyObjectType } from '#utils/others'
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class

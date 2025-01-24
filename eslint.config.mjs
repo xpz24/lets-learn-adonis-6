@@ -1,10 +1,10 @@
-import { configApp, RULES_LIST, IGNORE_LIST, INCLUDE_LIST } from '@adonisjs/eslint-config'
-import tseslint from 'typescript-eslint'
+import { configApp, IGNORE_LIST, INCLUDE_LIST, RULES_LIST } from '@adonisjs/eslint-config'
 import eslint from '@eslint/js'
-import eslintPluginUnicorn from 'eslint-plugin-unicorn'
+import { createOxcImportResolver } from 'eslint-import-resolver-oxc'
 // import globals from 'globals'
 import eslintPluginImportX from 'eslint-plugin-import-x'
-import { createOxcImportResolver } from 'eslint-import-resolver-oxc'
+import eslintPluginUnicorn from 'eslint-plugin-unicorn'
+import tseslint from 'typescript-eslint'
 
 const keysToRemove = ['unicorn/no-null']
 

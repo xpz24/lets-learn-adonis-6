@@ -14,7 +14,7 @@ export default class extends BaseSchema {
       table.string('headshot_url', 255).nullable()
 
       table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').nullable()
+      table.timestamp('updated_at').notNullable()
     })
   }
 

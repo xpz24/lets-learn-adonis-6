@@ -8,7 +8,7 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      
+
       table.integer('status_id').unsigned().notNullable().references('id').inTable('movie_statuses')
       table.integer('writer_id').unsigned().notNullable().references('id').inTable('cineasts')
       table.integer('director_id').unsigned().notNullable().references('id').inTable('cineasts')
@@ -21,7 +21,7 @@ export default class extends BaseSchema {
       table.timestamp('released_at').nullable()
 
       table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').nullable()
+      table.timestamp('updated_at').notNullable()
     })
   }
 

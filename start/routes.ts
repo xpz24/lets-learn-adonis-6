@@ -1,3 +1,5 @@
+import router from '@adonisjs/core/services/router'
+
 /*
 |--------------------------------------------------------------------------
 | Routes file
@@ -8,7 +10,7 @@
 */
 
 const RedisController = () => import('#controllers/redis_controller')
-import router from '@adonisjs/core/services/router'
+
 const MoviesController = () => import('#controllers/movies_controller')
 
 const SLUG_REGEX = /^[\da-z]+(?:-[\da-z]+)*$/
