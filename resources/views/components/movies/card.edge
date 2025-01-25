@@ -3,7 +3,8 @@
 <div class="movie-card-border">
   <div class="movie-image-container">
     <img
-      src="https://picsum.photos/200?v={{ movie.slug }}"
+      {{-- src="https://picsum.photos/200?v={{ movie.slug }}" --}}
+      src="{{ movie.posterUrl }}"
       loading="lazy"
       alt="{{ movie.slug }}"
       class="movie-image"

@@ -40,8 +40,8 @@ export const MovieFactory = factory
       title: faker.book.title(),
       slug: faker.lorem.slug(),
       summary: faker.lorem.sentence(),
-      abstract: faker.lorem.paragraph(),
-      posterUrl: faker.image.urlPicsumPhotos({ width: 200 }),
+      abstract: faker.lorem.paragraphs(5),
+      posterUrl: faker.image.urlPicsumPhotos({ width: 300, height: 300, blur: 0 }),
       releasedAt: fakeReleaseDate(statusId),
     }
   })

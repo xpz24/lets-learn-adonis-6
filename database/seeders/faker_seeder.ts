@@ -9,7 +9,7 @@ export default class extends BaseSeeder {
 
   async run() {
     await CineastFactory.createMany(30)
-    await MovieFactory.createMany(3)
+    await MovieFactory.createMany(30)
     await UserFactory.createMany(5)
   }
 }

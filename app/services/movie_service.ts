@@ -1,15 +1,21 @@
-import fs from 'node:fs/promises'
-import app from '@adonisjs/core/services/app'
-import type { MovieFrontMatter } from '@typings/movie'
+// import fs from 'node:fs/promises'
+// import app from '@adonisjs/core/services/app'
+// import type { MovieFrontMatter } from '@typings/movie'
 import Movie from '#models/movie'
-import cache from '#services/cache_service'
-import customErrorHandler from '#utils/error_helper'
-import markToHtml from '#utils/markdown_to_html'
-import { verifyObjectType } from '#utils/others'
 
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
+// import cache from '#services/cache_service'
+// import customErrorHandler from '#utils/error_helper'
+// import markToHtml from '#utils/markdown_to_html'
+// import { verifyObjectType } from '#utils/others'
+
+// eslint-disable-next-line unicorn/no-static-only-class, @typescript-eslint/no-extraneous-class
 export default class MovieService {
-  static #keysOfFrontmatter: (keyof MovieFrontMatter)[] = ['title', 'summary']
+  static movieList = Movie.all()
+
+  static async getMovie(property: string, value: string) {
+    return await Movie.findByOrFail(property, value)
+  }
+  /*static #keysOfFrontmatter: (keyof MovieFrontMatter)[] = ['title', 'summary']
   static #keysOfMovie: (keyof Movie)[] = [...this.#keysOfFrontmatter, 'slug', 'abstract']
 
   static async getMovieList(moviesResourceDirectory: string): Promise<Movie[]> {
@@ -47,5 +53,5 @@ export default class MovieService {
     })
 
     return await Movie.createMovieObject(frontmatter, slug, html)
-  }
+  }*/
 }

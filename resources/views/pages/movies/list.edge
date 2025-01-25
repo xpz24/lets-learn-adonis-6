@@ -14,11 +14,11 @@
   <body>
     @include('partials/header')
     <main>
-      <h1>
+      <h1 class="list-heading">
         Available Movies
       </h1>
 
-      <div class="movie-grid items-center">
+      <div class="movie-grid">
         @each(movie in movies)
           @!movies.card({ movie })
         @end

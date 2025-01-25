@@ -13,7 +13,7 @@ export default class extends BaseSchema {
       table.integer('movie_id').unsigned().notNullable().references('id').inTable('movies')
 
       table.string('character_name', 200).notNullable()
-      table.integer('sort_order').notNullable()
+      table.integer('sort_order').notNullable().defaultTo(0)
 
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').notNullable()

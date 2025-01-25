@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
-import type { MovieFrontMatter } from '@typings/movie'
-import cache from '#services/cache_service'
+// import type { MovieFrontMatter } from '@typings/movie'
+// import cache from '#services/cache_service'
 
 export default class Movie extends BaseModel {
   @column({ isPrimary: true })
@@ -40,27 +40,27 @@ export default class Movie extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  static getSlug(filename: string): string {
-    if (!filename.endsWith('.md')) {
-      throw new Error(`Incorrect file type, expecting a markdown file but got: ${filename}`)
-    }
+  // static getSlug(filename: string): string {
+  //   if (!filename.endsWith('.md')) {
+  //     throw new Error(`Incorrect file type, expecting a markdown file but got: ${filename}`)
+  //   }
 
-    return filename.replace('.md', '')
-  }
+  //   return filename.replace('.md', '')
+  // }
 
-  static async createMovieObject(
-    frontmatter: MovieFrontMatter,
-    slug: string,
-    abstract: string
-  ): Promise<Movie> {
-    const movie = new Movie()
-    movie.title = frontmatter.title
-    movie.summary = frontmatter.summary
-    movie.slug = slug
-    movie.abstract = abstract
+  // static async createMovieObject(
+  //   frontmatter: MovieFrontMatter,
+  //   slug: string,
+  //   abstract: string
+  // ): Promise<Movie> {
+  //   const movie = new Movie()
+  //   movie.title = frontmatter.title
+  //   movie.summary = frontmatter.summary
+  //   movie.slug = slug
+  //   movie.abstract = abstract
 
-    await cache.set(slug, movie)
+  //   await cache.set(slug, movie)
 
-    return movie
-  }
+  //   return movie
+  // }
 }
