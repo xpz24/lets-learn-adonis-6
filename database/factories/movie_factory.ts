@@ -9,19 +9,29 @@ export const MovieFactory = factory
     function fakeReleaseDate(statusId: number) {
       switch (statusId) {
         case 1: {
-          return DateTime.fromJSDate(faker.date.future({ years: 5, refDate: '2030' }))
+          return DateTime.fromJSDate(
+            faker.date.future({ years: 5, refDate: '2030' })
+          )
         }
         case 2: {
-          return DateTime.fromJSDate(faker.date.future({ years: 4, refDate: '2029' }))
+          return DateTime.fromJSDate(
+            faker.date.future({ years: 4, refDate: '2029' })
+          )
         }
         case 3: {
-          return DateTime.fromJSDate(faker.date.future({ years: 3, refDate: '2025' }))
+          return DateTime.fromJSDate(
+            faker.date.future({ years: 3, refDate: '2025' })
+          )
         }
         case 4: {
-          return DateTime.fromJSDate(faker.date.future({ years: 2, refDate: '2024' }))
+          return DateTime.fromJSDate(
+            faker.date.future({ years: 2, refDate: '2024' })
+          )
         }
         case 5: {
-          return DateTime.fromJSDate(faker.date.past({ years: 50, refDate: '2025' }))
+          return DateTime.fromJSDate(
+            faker.date.past({ years: 50, refDate: '2025' })
+          )
         }
         // No default
       }
@@ -29,7 +39,9 @@ export const MovieFactory = factory
       return null
     }
 
-    const statuses = Object.values(MovieStatuses).filter((status) => typeof status === 'number')
+    const statuses = Object.values(MovieStatuses).filter(
+      (status) => typeof status === 'number'
+    )
 
     const statusId = statuses[Math.floor(Math.random() * statuses.length)]
 
@@ -41,7 +53,11 @@ export const MovieFactory = factory
       slug: faker.lorem.slug(),
       summary: faker.lorem.sentence(),
       abstract: faker.lorem.paragraphs(5),
-      posterUrl: faker.image.urlPicsumPhotos({ width: 300, height: 300, blur: 0 }),
+      posterUrl: faker.image.urlPicsumPhotos({
+        width: 300,
+        height: 300,
+        blur: 0,
+      }),
       releasedAt: fakeReleaseDate(statusId),
     }
   })

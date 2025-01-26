@@ -12,11 +12,16 @@ export default {
   quoteProps: 'consistent',
   bracketSpacing: true,
   arrowParens: 'always',
-  printWidth: 100,
+  // printWidth: 100,
   plugins: [
     '@ianvs/prettier-plugin-sort-imports',
     'prettier-plugin-tailwindcss',
     'prettier-edgejs',
     'prettier-plugin-sh',
   ],
+  importOrderParserPlugins: [
+    'typescript',          // Enables TypeScript syntax support
+    'decorators',   // Enables support for AdonisJS-style decorators
+  ],
+  importOrderTypeScriptVersion: '5.7.3',
 }

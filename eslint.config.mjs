@@ -20,6 +20,7 @@ const customDefaultRules = {
     },
   ],
   '@typescript-eslint/return-await': ['error', 'always'],
+  'unicorn/consistent-function-scoping': ['error', { checkArrowFunctions: false },]
 }
 
 const eslintRecommendedRules = extractRules([eslint.configs.recommended])
