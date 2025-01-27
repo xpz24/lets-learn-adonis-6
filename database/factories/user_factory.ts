@@ -1,4 +1,5 @@
 import factory from '@adonisjs/lucid/factories'
+import { ProfileFactory } from '#database/factories/profile_factory'
 import Roles from '#enums/roles'
 import User from '#models/user'
 
@@ -30,4 +31,5 @@ export const UserFactory = factory
       return user
     }
   })
+  .relation('profile', () => ProfileFactory)
   .build()

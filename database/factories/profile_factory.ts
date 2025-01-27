@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/require-await */
 import factory from '@adonisjs/lucid/factories'
+import { UserFactory } from '#database/factories/user_factory'
 import Roles from '#enums/roles'
 import Profile from '#models/profile'
 
@@ -21,4 +22,5 @@ export const ProfileFactory = factory
       }
     }
   })
+  .relation('user', () => UserFactory)
   .build()
