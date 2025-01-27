@@ -1,0 +1,11 @@
+@vite(['resources/css/components/movies/grid.css'])
+
+<h2 class="movie-grid-header">
+  {{ title }}
+</h2>
+
+<div class="movie-grid">
+  @each(movie in list)
+    @!movies.card({ movie })
+  @end
+</div>

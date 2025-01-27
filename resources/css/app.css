@@ -47,6 +47,12 @@ main {
     text-decoration: underline;
   }
 
+  & h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
   & p {
     text-align: justify;
   }

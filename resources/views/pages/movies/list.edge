@@ -14,15 +14,19 @@
   <body>
     @include('partials/header')
     <main>
-      <h1 class="list-heading">
-        Available Movies
+      <h1>
+        Movies
       </h1>
+      
+      @!movies.grid({
+        title: 'Recently Released',
+        list: recentlyReleased
+      })
 
-      <div class="movie-grid">
-        @each(movie in movies)
-          @!movies.card({ movie })
-        @end
-      </div>
+      @!movies.grid({
+        title: 'Coming Soon',
+        list: releasingSoon
+      })
 
       <ol>
         @each(movie in movies)

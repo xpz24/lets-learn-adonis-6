@@ -17,6 +17,9 @@
     <p class="movie-summary">
       {{ truncate(movie.summary, 50, { completeWords: true }) }}
     </p>
+    <p class="movie-summary">
+      Release Date: {{ movie.releasedAt?.toFormat('LLLL | yyyy') }}
+    </p>
     @button({
       removeExistingStyles: false,
       href: route('movies.show', { slug: movie.slug }) ,

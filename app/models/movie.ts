@@ -1,4 +1,5 @@
-import { BaseModel, column, scope } from '@adonisjs/lucid/orm'
+import stringHelpers from '@adonisjs/core/helpers/string'
+import { BaseModel, beforeCreate, column, scope } from '@adonisjs/lucid/orm'
 import MovieStatuses from '#enums/movie_statuses'
 import { DateTime } from 'luxon'
 
@@ -41,6 +42,53 @@ export default class Movie extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
+  // Hooks
+  @beforeCreate()
+  static async generateSlug(movie: Movie) {
+    const slug = stringHelpers.slug(movie.title, {
+      replacement: '-',
+      lower: true,
+      strict: true,
+      trim: true,
+    })
+
+    const rows = await Movie.query()
+      .select('slug')
+      .whereRaw('lower(??) = ?', ['slug', slug])
+      .orWhereRaw('lower(??) like ?', ['slug', `${slug}-%`])
+    if (rows.length === 0) {
+      movie.slug = slug
+      return
+    }
+
+    const incrementorArray: number[] = []
+
+    for (const row of rows) {
+      const tokens = row.slug.split(`${slug}-`)
+      if (tokens.length < 2) {
+        continue
+      } else if (!Number.isNaN(Number(tokens[1])) && Number(tokens[1]) > 0) {
+        incrementorArray.push(Number(tokens[1]))
+      }
+    }
+    // console.log(incrementorArray.length)
+
+    if (incrementorArray.length === 0) {
+      movie.slug = `${slug}-1`
+      return
+    } else {
+      const sortedArray = incrementorArray.sort((a, b) => a - b)
+      for (const [index, incrementor] of sortedArray.entries()) {
+        if (incrementor !== index + 1) {
+          movie.slug = `${slug}-${(index + 1).toString()}`
+          return
+        }
+      }
+      movie.slug = `${slug}-${(sortedArray.length + 1).toString()}`
+    }
+  }
+
+  // Scopes
   static released = scope(async (query) => {
     await query.where(async (builder) => {
       await builder
@@ -50,6 +98,14 @@ export default class Movie extends BaseModel {
     })
   })
 
+  static unReleased = scope(async (query) => {
+    await query.where(async (builder) => {
+      await builder
+        .whereNull('releasedAt')
+        .orWhereNot('statusId', MovieStatuses.RELEASED)
+        .orWhere('releasedAt', '>', DateTime.now().toSQLDate())
+    })
+  })
   // static getSlug(filename: string): string {
   //   if (!filename.endsWith('.md')) {
   //     throw new Error(`Incorrect file type, expecting a markdown file but got: ${filename}`)

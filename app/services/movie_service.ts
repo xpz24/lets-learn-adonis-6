@@ -12,6 +12,17 @@ import Movie from '#models/movie'
 export default class MovieService {
   static movieList = Movie.all()
 
+  static recentlyReleased = Movie.query()
+    .withScopes((scope) => scope.released())
+    .orderBy('releasedAt', 'desc')
+    .limit(15)
+
+  static releasingSoon = Movie.query()
+    .withScopes((scope) => scope.unReleased())
+    .whereNotNull('releasedAt')
+    .orderBy('releasedAt', 'desc')
+    .limit(10)
+
   static async getMovie(property: string, value: string) {
     return await Movie.findByOrFail(property, value)
   }

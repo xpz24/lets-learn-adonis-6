@@ -9,23 +9,25 @@ export const MovieFactory = factory
     function fakeReleaseDate(statusId: number) {
       switch (statusId) {
         case 1: {
-          return DateTime.fromJSDate(
-            faker.date.future({ years: 5, refDate: '2030' })
-          )
+          // return DateTime.fromJSDate(
+          //   faker.date.future({ years: 5, refDate: '2030' })
+          // )
+          return null
         }
         case 2: {
-          return DateTime.fromJSDate(
-            faker.date.future({ years: 4, refDate: '2029' })
-          )
+          // return DateTime.fromJSDate(
+          //   faker.date.future({ years: 4, refDate: '2029' })
+          // )
+          return null
         }
         case 3: {
           return DateTime.fromJSDate(
-            faker.date.future({ years: 3, refDate: '2025' })
+            faker.date.future({ years: 2, refDate: '2025' })
           )
         }
         case 4: {
           return DateTime.fromJSDate(
-            faker.date.future({ years: 2, refDate: '2024' })
+            faker.date.soon({ days: 365, refDate: '2024' })
           )
         }
         case 5: {
@@ -50,7 +52,7 @@ export const MovieFactory = factory
       writerId: faker.number.int({ min: 1, max: 10 }),
       directorId: faker.number.int({ min: 11, max: 20 }),
       title: faker.book.title(),
-      slug: faker.lorem.slug(),
+      // slug: faker.lorem.slug(), //Should be taken care of by the createSlug() hook
       summary: faker.lorem.sentence(),
       abstract: faker.lorem.paragraphs(5),
       posterUrl: faker.image.urlPicsumPhotos({

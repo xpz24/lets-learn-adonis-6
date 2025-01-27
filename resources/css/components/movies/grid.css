@@ -1,0 +1,11 @@
+.movie-grid-header {
+  display: inline flow-root;
+  margin-block: 1rem;
+}
+
+.movie-grid {
+  display: block grid;
+  grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+  grid-auto-rows: auto;
+  gap: 1rem;
+}
