@@ -1,6 +1,15 @@
 import stringHelpers from '@adonisjs/core/helpers/string'
-import { BaseModel, beforeCreate, column, scope } from '@adonisjs/lucid/orm'
+import {
+  BaseModel,
+  beforeCreate,
+  belongsTo,
+  column,
+  scope,
+} from '@adonisjs/lucid/orm'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import MovieStatuses from '#enums/movie_statuses'
+import Cineast from '#models/cineast'
+import MovieStatus from '#models/movie_status'
 import { DateTime } from 'luxon'
 
 // import type { MovieFrontMatter } from '@typings/movie'
@@ -42,9 +51,23 @@ export default class Movie extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
+  // Relationships
+  @belongsTo(() => MovieStatus, { foreignKey: 'statusId' })
+  declare status: BelongsTo<typeof MovieStatus>
+
+  @belongsTo(() => Cineast, { foreignKey: 'writerId' })
+  declare writer: BelongsTo<typeof Cineast>
+
+  @belongsTo(() => Cineast, { foreignKey: 'directorId' })
+  declare director: BelongsTo<typeof Cineast>
+
   // Hooks
   @beforeCreate()
   static async generateSlug(movie: Movie) {
+    if (movie.slug) {
+      return
+    }
+
     const slug = stringHelpers.slug(movie.title, {
       replacement: '-',
       lower: true,
@@ -54,8 +77,8 @@ export default class Movie extends BaseModel {
 
     const rows = await Movie.query()
       .select('slug')
-      .whereRaw('lower(??) = ?', ['slug', slug])
-      .orWhereRaw('lower(??) like ?', ['slug', `${slug}-%`])
+      .whereRaw('LOWER(??) = ?', ['slug', slug])
+      .orWhereRaw('LOWER(??) LIKE ?', ['slug', `${slug}-%`])
     if (rows.length === 0) {
       movie.slug = slug
       return
@@ -71,7 +94,6 @@ export default class Movie extends BaseModel {
         incrementorArray.push(Number(tokens[1]))
       }
     }
-    // console.log(incrementorArray.length)
 
     if (incrementorArray.length === 0) {
       movie.slug = `${slug}-1`

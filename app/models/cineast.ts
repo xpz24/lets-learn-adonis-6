@@ -1,4 +1,6 @@
-import { BaseModel, column, computed } from '@adonisjs/lucid/orm'
+import { BaseModel, column, computed, hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
+import Movie from '#models/movie'
 import { DateTime } from 'luxon'
 
 export default class Cineast extends BaseModel {
@@ -19,6 +21,13 @@ export default class Cineast extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+
+  // Relationships
+  @hasMany(() => Movie, { foreignKey: 'directorId' })
+  declare moviesDirected: HasMany<typeof Movie>
+
+  @hasMany(() => Movie, { foreignKey: 'writerId' })
+  declare moviesWritten: HasMany<typeof Movie>
 
   @computed()
   get fullName() {

@@ -1,4 +1,6 @@
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
+import Movie from '#models/movie'
 import { DateTime } from 'luxon'
 
 export default class MovieStatus extends BaseModel {
@@ -13,4 +15,8 @@ export default class MovieStatus extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  // Relationships
+  @hasMany(() => Movie, { foreignKey: 'statusId' })
+  declare movies: HasMany<typeof Movie>
 }

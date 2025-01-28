@@ -9,8 +9,20 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
 
-      table.integer('user_id').unsigned().notNullable().references('id').inTable('users')
-      table.integer('movie_id').unsigned().notNullable().references('id').inTable('movies')
+      table
+        .integer('user_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+      table
+        .integer('movie_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('movies')
+        .onDelete('CASCADE')
       table.timestamp('watched_at').nullable()
 
       table.timestamp('created_at').notNullable()

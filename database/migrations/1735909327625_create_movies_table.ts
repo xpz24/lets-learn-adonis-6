@@ -9,9 +9,24 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
 
-      table.integer('status_id').unsigned().notNullable().references('id').inTable('movie_statuses')
-      table.integer('writer_id').unsigned().notNullable().references('id').inTable('cineasts')
-      table.integer('director_id').unsigned().notNullable().references('id').inTable('cineasts')
+      table
+        .integer('status_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('movie_statuses')
+      table
+        .integer('writer_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('cineasts')
+      table
+        .integer('director_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('cineasts')
 
       table.string('title', 100).notNullable()
       table.string('slug', 200).notNullable().unique()
