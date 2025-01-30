@@ -7,7 +7,10 @@ export function throwErrorIfUndefined(
   }
 }
 
-export function verifyObjectType<T>(object: unknown, keys: (keyof T)[]): asserts object is T {
+export function verifyObjectType<T>(
+  object: unknown,
+  keys: (keyof T)[]
+): asserts object is T {
   if (
     typeof object !== 'object' ||
     object === null ||
@@ -37,4 +40,8 @@ export function deepMerge(...objects: Record<string, unknown>[]) {
     }
     return mergedObject
   })
+}
+
+export function getRandomArrayItem<T>(array: T[]) {
+  return array[Math.floor(Math.random() * array.length)]
 }

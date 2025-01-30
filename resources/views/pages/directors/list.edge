@@ -1,0 +1,24 @@
+@defaultLayout({
+  title: 'List of Directors',
+  cssArray: ['resources/css/pages/directors/list.css'],
+})
+  <h1>
+    Directors
+  </h1>
+  @list({
+    removeExistingStyles: false,
+    isOrdered: true
+  })
+    @each(director in directors)
+      <li>
+        @button({
+          removeExistingStyles: false,
+          href: route('directors.show',{ id: director.id }),
+          class: ['director-link-button'],
+        })
+          <i>{{ director.fullName }} (Released: {{ director.$extras.releasedCount }} | Unreleased: {{ director.$extras.unReleasedCount }})</i>
+        @end
+      </li>
+    @end
+  @end
+@end

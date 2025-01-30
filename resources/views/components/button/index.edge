@@ -2,10 +2,9 @@
 
 @let(
   attributes = $props.mergeUnless(removeExistingStyles, { class: ['component-button'] })
-  .except([removeExistingStyles])
+  .except(['removeExistingStyles'])
   .toAttrs()
 )
-
 @let(nodeName = $props.has('href') ? 'a' : 'button')
 
 <{{ nodeName }} {{ attributes }}>

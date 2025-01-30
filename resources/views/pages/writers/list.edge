@@ -1,0 +1,25 @@
+@defaultLayout({
+  title: 'List of Writers',
+  cssArray: ['resources/css/pages/writers/list.css'],
+})
+  <h1>
+    Writers
+  </h1>
+  @list({
+    removeExistingStyles: false,
+    isOrdered: true
+  })
+    @each(writer in writers)
+      <li>
+        @button({
+          removeExistingStyles: false,
+          href: route('writers.show',{ id: writer.id }),
+          class:['writer-link-button']
+        })
+          <i>{{ writer.fullName }} (Released: {{ writer.$extras.releasedCount }} | Unreleased: {{ writer.$extras.unReleasedCount }})</i>
+        @end
+      </li>
+    @end
+  @end
+@end
+

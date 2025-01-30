@@ -3,7 +3,9 @@ import browserslist from 'browserslist'
 import { resolveToEsbuildTarget } from 'esbuild-plugin-browserslist'
 import { defineConfig } from 'vite'
 
-const targets = resolveToEsbuildTarget(browserslist(), { printUnknownTargets: false })
+const targets = resolveToEsbuildTarget(browserslist(), {
+  printUnknownTargets: false,
+})
 
 export default defineConfig({
   plugins: [

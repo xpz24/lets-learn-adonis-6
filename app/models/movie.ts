@@ -111,18 +111,18 @@ export default class Movie extends BaseModel {
   }
 
   // Scopes
-  static released = scope(async (query) => {
-    await query.where(async (builder) => {
-      await builder
+  static released = scope((query) => {
+    return query.where((builder) => {
+      return builder
         .whereNotNull('releasedAt')
         .where('statusId', MovieStatuses.RELEASED)
         .where('releasedAt', '<=', DateTime.now().toSQLDate())
     })
   })
 
-  static unReleased = scope(async (query) => {
-    await query.where(async (builder) => {
-      await builder
+  static unReleased = scope((query) => {
+    return query.where((builder) => {
+      return builder
         .whereNull('releasedAt')
         .orWhereNot('statusId', MovieStatuses.RELEASED)
         .orWhere('releasedAt', '>', DateTime.now().toSQLDate())

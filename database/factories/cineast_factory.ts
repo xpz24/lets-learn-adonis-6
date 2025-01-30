@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/require-await */
 import factory from '@adonisjs/lucid/factories'
+import { MovieFactory } from '#database/factories/movie_factory'
 import Cineast from '#models/cineast'
 
 export const CineastFactory = factory
@@ -10,4 +11,6 @@ export const CineastFactory = factory
       headshotUrl: faker.image.avatar(),
     }
   })
+  .relation('moviesDirected', () => MovieFactory)
+  .relation('moviesWritten', () => MovieFactory)
   .build()

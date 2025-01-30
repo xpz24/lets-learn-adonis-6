@@ -8,7 +8,9 @@ interface FrontmatterOptions {
   onExtract?: (frontmatter: unknown, file: VFile) => void
 }
 
-const remarkExtractFrontmatter: Plugin<[FrontmatterOptions?]> = (options?: FrontmatterOptions) => {
+const remarkExtractFrontmatter: Plugin<[FrontmatterOptions?]> = (
+  options?: FrontmatterOptions
+) => {
   const onExtract = options?.onExtract
 
   return (tree, file) => {

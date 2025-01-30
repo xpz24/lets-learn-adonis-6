@@ -35,7 +35,9 @@ function urlToPath(pathStringUrl: string | URL): string {
     return fileURLToPath(pathStringUrl)
   }
   if (typeof pathStringUrl !== 'string') {
-    throw new TypeError('The input to this function can only be strings or file urls')
+    throw new TypeError(
+      'The input to this function can only be strings or file urls'
+    )
   }
 
   return pathStringUrl
@@ -73,7 +75,9 @@ async function ensurePathAccessible(
     try {
       await fs.access(resolvedPath, mode)
     } catch {
-      console.log(`Path is not accessible: ${resolvedPath} -> ${mode.toString()}`)
+      console.log(
+        `Path is not accessible: ${resolvedPath} -> ${mode.toString()}`
+      )
       return false
     }
 
@@ -87,7 +91,10 @@ async function resolvePathAlias(
   aliasPathUrl: string | URL,
   options?: Options
 ): Promise<string | URL> {
-  if (!aliasPathUrl || (typeof aliasPathUrl !== 'string' && !(aliasPathUrl instanceof URL))) {
+  if (
+    !aliasPathUrl ||
+    (typeof aliasPathUrl !== 'string' && !(aliasPathUrl instanceof URL))
+  ) {
     throw new TypeError('Invalid file path input')
   }
 
@@ -120,8 +127,15 @@ async function resolvePathAlias(
         const unresolvedPathAliasList = aliases[alias]
 
         for (const unresolvedPath of unresolvedPathAliasList) {
-          const resolvedPath = path.join(unresolvedPath, aliasPath.slice(alias.length)) //aliasPath.replace(alias, resolvedPathAlias)
-          const accessible = await ensurePathAccessible(resolvedPath, options?.fsValue, true)
+          const resolvedPath = path.join(
+            unresolvedPath,
+            aliasPath.slice(alias.length)
+          ) //aliasPath.replace(alias, resolvedPathAlias)
+          const accessible = await ensurePathAccessible(
+            resolvedPath,
+            options?.fsValue,
+            true
+          )
 
           if (accessible) {
             return returnUrl(resolvedPath, options?.file)
@@ -133,8 +147,13 @@ async function resolvePathAlias(
 
   // At this stage the aliasPath must be a relative path without an alias
   // and therefore, must resolve relative to the caller module
-  if (!options?.callerDirectory || typeof options.callerDirectory !== 'string') {
-    throw new TypeError(`Invalid caller directory for relative path resolution: "${aliasPath}"`)
+  if (
+    !options?.callerDirectory ||
+    typeof options.callerDirectory !== 'string'
+  ) {
+    throw new TypeError(
+      `Invalid caller directory for relative path resolution: "${aliasPath}"`
+    )
   }
   // Fallback: Resolve and verify the path if path is not absolute
   const resolvedFallbackPath = path.join(options.callerDirectory, aliasPath)

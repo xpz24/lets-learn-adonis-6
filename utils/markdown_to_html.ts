@@ -36,11 +36,15 @@ async function markToHtml<T = undefined>(
   filePathUrl: string | URL,
   options?: Options<T>
 ): Promise<ParsedMarkdown<T>> {
-  if (!filePathUrl || (typeof filePathUrl !== 'string' && !(filePathUrl instanceof URL))) {
+  if (
+    !filePathUrl ||
+    (typeof filePathUrl !== 'string' && !(filePathUrl instanceof URL))
+  ) {
     throw new TypeError('Invalid file path input')
   }
 
-  const filePath = filePathUrl instanceof URL ? filePathUrl.toString() : filePathUrl
+  const filePath =
+    filePathUrl instanceof URL ? filePathUrl.toString() : filePathUrl
 
   // Ensure the file exists and is an MD file
   if (!filePath.endsWith('.md')) {

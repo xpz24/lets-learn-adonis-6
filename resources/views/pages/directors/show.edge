@@ -1,0 +1,13 @@
+@defaultLayout({
+  title: `Directed by ${director.fullName}`,
+  cssArray: ['resources/css/pages/directors/show.css'],
+})
+  <h1>
+    Movies Directed By {{director.fullName}}
+  </h1>
+
+  @!movies.grid({
+    list: movies
+  })
+
+@end

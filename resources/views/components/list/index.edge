@@ -1,0 +1,20 @@
+@vite(['resources/css/components/list/index.css'])
+
+@let(isOrdered = $props.get('isOrdered'))
+@let(nodeName = isOrdered ? 'ol' : 'ul')
+@let(
+  baseClasses = [
+    'component-list',
+    isOrdered ? 'component-list-ordered' : 'component-list-unordered'
+  ]
+)
+@let(
+  attributes = $props
+    .mergeUnless(removeExistingStyles, {class: baseClasses})
+    .except(['removeExistingStyles', 'isOrdered'])
+    .toAttrs()
+)
+
+<{{ nodeName }} {{ attributes }}>
+  {{{ await $slots.main() }}}
+</{{ nodeName }}>

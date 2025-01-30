@@ -1,0 +1,29 @@
+.component-list {
+  /* blank */
+}
+
+.component-list-unordered {
+  /* blank */
+}
+
+.component-list-ordered {
+  margin-inline-start: 2rem;
+  list-style: outside decimal-leading-zero;
+
+  & li {
+    margin-block: 1rem;
+
+    & a {
+      color: blue;
+      transition: color 0.2s ease-in-out;
+
+      &:visited {
+        color: purple;
+      }
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}

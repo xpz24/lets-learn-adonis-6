@@ -12,13 +12,19 @@ import Movie from '#models/movie'
 export default class MovieService {
   static movieList = Movie.all()
 
+  // Better to create a getMovies function with a scope callback as the argument?
+  // And filter the data directly on the controller as thats what should be controlling the views
   static recentlyReleased = Movie.query()
     .withScopes((scope) => scope.released())
+    .preload('director')
+    .preload('writer')
     .orderBy('releasedAt', 'desc')
     .limit(15)
 
   static releasingSoon = Movie.query()
     .withScopes((scope) => scope.unReleased())
+    .preload('director')
+    .preload('writer')
     .whereNotNull('releasedAt')
     .orderBy('releasedAt', 'desc')
     .limit(10)

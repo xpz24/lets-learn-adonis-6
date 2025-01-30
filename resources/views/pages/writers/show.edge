@@ -1,0 +1,13 @@
+@defaultLayout({
+  title: `Written by ${writer.fullName}`,
+  cssArray: ['resources/css/pages/writers/show.css'],
+})
+  <h1>
+    Movies Written By {{writer.fullName}}
+  </h1>
+
+  @!movies.grid({
+    list: writer.moviesWritten
+  })
+
+@end

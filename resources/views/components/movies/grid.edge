@@ -1,8 +1,10 @@
 @vite(['resources/css/components/movies/grid.css'])
 
-<h2 class="movie-grid-header">
-  {{ title }}
-</h2>
+@if(title)
+  <h2 class="movie-grid-header">
+    {{ title }}
+  </h2>
+@end
 
 <div class="movie-grid">
   @each(movie in list)

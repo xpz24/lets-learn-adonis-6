@@ -1,6 +1,8 @@
 import factory from '@adonisjs/lucid/factories'
+import { CineastFactory } from '#database/factories/cineast_factory'
 import MovieStatuses from '#enums/movie_statuses'
 import Movie from '#models/movie'
+import { getRandomArrayItem } from '#utils/others'
 import { DateTime } from 'luxon'
 
 export const MovieFactory = factory
@@ -45,14 +47,14 @@ export const MovieFactory = factory
       (status) => typeof status === 'number'
     )
 
-    const statusId = statuses[Math.floor(Math.random() * statuses.length)]
+    const statusId = getRandomArrayItem(statuses)
 
     return {
       statusId,
-      writerId: faker.number.int({ min: 1, max: 10 }),
-      directorId: faker.number.int({ min: 11, max: 20 }),
+      // writerId: faker.number.int({ min: 1, max: 10 }), // Handled by the relationship with CineastFactory
+      // directorId: faker.number.int({ min: 11, max: 20 }), // Handled by the relationship with CineastFactory
       title: faker.book.title(),
-      // slug: faker.lorem.slug(), //Should be taken care of by the createSlug() hook
+      // slug: faker.lorem.slug(), //Should be taken care of by the createSlug() hook in Movie Model
       summary: faker.lorem.sentence(),
       abstract: faker.lorem.paragraphs(5),
       posterUrl: faker.image.urlPicsumPhotos({
@@ -63,4 +65,6 @@ export const MovieFactory = factory
       releasedAt: fakeReleaseDate(statusId),
     }
   })
+  .relation('director', () => CineastFactory)
+  .relation('writer', () => CineastFactory)
   .build()

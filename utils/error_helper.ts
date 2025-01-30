@@ -1,7 +1,12 @@
 import { Exception } from '@adonisjs/core/exceptions'
 
 function isNodeSystemError(error: Error): error is NodeJS.ErrnoException {
-  return typeof error === 'object' && 'code' in error && 'errno' in error && 'syscall' in error
+  return (
+    typeof error === 'object' &&
+    'code' in error &&
+    'errno' in error &&
+    'syscall' in error
+  )
 }
 
 export default function customErrorHandler(
@@ -15,10 +20,13 @@ export default function customErrorHandler(
             code: 'E_NOT_FOUND',
             status: 404,
           })
-        : new Exception(`A system error has occurred: ${error.name} -> ${error.message}`, {
-            code: error.code,
-            status: error.errno,
-          })
+        : new Exception(
+            `A system error has occurred: ${error.name} -> ${error.message}`,
+            {
+              code: error.code,
+              status: error.errno,
+            }
+          )
     throw errorInstance
   } else if (error instanceof Error && error instanceof Exception) {
     throw error

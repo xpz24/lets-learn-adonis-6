@@ -1,28 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      Movie Page
-    </title>
-    @include('partials/fonts/instrument-sans')
-    @vite(['resources/css/app.css', 'resources/css/pages/movies/show.css', 'resources/js/app.js'])
-  </head>
-  <body>
-    @include('partials/header')
-    <main>
-      <h1 class="movie-title">
-        {{ movie.title }}
-      </h1>
-      @if (movie.abstract)
-        <div class="movie-description">
-          {{{ movie.abstract }}}
-        </div>
-      @else
-        No Abstract
-      @endif
-      {{ inspect(movie) }}
-    </main>
-  </body>
-</html>
+@defaultLayout({
+  title: 'Show Movie Page',
+  cssArray: ['resources/css/pages/movies/show.css']
+}) 
+  <h1 class="movie-title">
+    {{ movie.title }}
+  </h1>
+  @if (movie.abstract)
+    <div class="movie-description">
+      {{{ movie.abstract }}}
+    </div>
+  @else
+    No Abstract
+  @endif
+  {{ inspect(movie) }}
+@end
