@@ -1,19 +1,19 @@
 // import fs from 'node:fs/promises'
 // import app from '@adonisjs/core/services/app'
 // import type { MovieFrontMatter } from '@typings/movie'
-import Movie from '#models/movie'
-
 // import cache from '#services/cache_service'
 // import customErrorHandler from '#utils/error_helper'
 // import markToHtml from '#utils/markdown_to_html'
 // import { verifyObjectType } from '#utils/others'
+import Movie from '#models/movie'
 
 // eslint-disable-next-line unicorn/no-static-only-class, @typescript-eslint/no-extraneous-class
 export default class MovieService {
+  // TODO: Convert class to an object
   static movieList = Movie.all()
 
-  // Better to create a getMovies function with a scope callback as the argument?
-  // And filter the data directly on the controller as thats what should be controlling the views
+  // TODO: Better to create a getMovies function with a scope callback as the argument?
+  // TODO: And filter the data directly on the controller as thats what should be controlling the views
   static recentlyReleased = Movie.query()
     .withScopes((scope) => scope.released())
     .preload('director')

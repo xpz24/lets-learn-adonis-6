@@ -10,3 +10,11 @@ export type ModelColumns<T extends LucidModel> = {
       ? never
       : K
 }[keyof InstanceType<T>]
+
+interface OrderBy<T extends LucidModel> {
+  column: ModelColumns<T>
+  order?: 'asc' | 'desc'
+  nulls?: 'first' | 'last'
+}
+
+export type OrderByArray<T extends LucidModel> = OrderBy<T>[]
