@@ -8,12 +8,16 @@
 
   @!movies.grid({
     title: 'Recently Released',
-    list: recentlyReleased
+    list: recentlyReleased,
+    showDirector: true,
+    showWriter: true,
   })
 
   @!movies.grid({
     title: 'Coming Soon',
-    list: releasingSoon
+    list: releasingSoon,
+    showDirector: true,
+    showWriter: true,
   })
 
   <form action="{{ route('redis.flush') }}" method="post">
@@ -25,5 +29,4 @@
       @end
     </div>
   </form>
-  {{-- {{ inspect(movies) }} --}}
 @end

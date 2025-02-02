@@ -1,10 +1,19 @@
 @defaultLayout({
   title: 'Show Movie Page',
   cssArray: ['resources/css/pages/movies/show.css']
-}) 
+})
   <h1 class="movie-title">
     {{ movie.title }}
   </h1>
+  <h2>
+    <i>
+      @if(movie.director === movie.writer)
+        {{ `Directed & Written by ${movie.director.fullName}` }}
+      @else
+        {{ `Directed by ${movie.director.fullName} & Written by ${movie.writer.fullName}` }}
+      @end
+    </i>
+  </h2>
   @if (movie.abstract)
     <div class="movie-description">
       {{{ movie.abstract }}}

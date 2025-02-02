@@ -8,6 +8,6 @@
 
 <div class="movie-grid">
   @each(movie in list)
-    @!movies.card({ movie })
+    @!movies.card({ movie, showDirector, showWriter })
   @end
 </div>

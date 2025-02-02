@@ -1,20 +1,23 @@
 import type { BaseModel } from '@adonisjs/lucid/orm'
 import type { LucidModel } from '@adonisjs/lucid/types/model'
 
-export type ModelColumns<T extends LucidModel> = {
-  [K in keyof InstanceType<T>]: InstanceType<T>[K] extends (
-    ...arguments_: unknown[]
-  ) => unknown
-    ? never
-    : K extends keyof InstanceType<typeof BaseModel>
+// ? is Exclude or Extract better? I think Exclude cause if this
+// ? type definition works as expected only strings will be left
+export type ModelColumns<T extends LucidModel> = Exclude<
+  {
+    [K in keyof InstanceType<T>]: InstanceType<T>[K] extends (
+      ...arguments_: unknown[]
+    ) => unknown
       ? never
-      : K
-}[keyof InstanceType<T>]
+      : K extends keyof InstanceType<typeof BaseModel>
+        ? never
+        : K
+  }[keyof InstanceType<T>],
+  undefined
+>
 
-interface OrderBy<T extends LucidModel> {
+export interface OrderBy<T extends LucidModel> {
   column: ModelColumns<T>
   order?: 'asc' | 'desc'
   nulls?: 'first' | 'last'
 }
-
-export type OrderByArray<T extends LucidModel> = OrderBy<T>[]

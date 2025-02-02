@@ -24,17 +24,17 @@ export const MovieFactory = factory
         }
         case 3: {
           return DateTime.fromJSDate(
-            faker.date.future({ years: 2, refDate: '2025' })
+            faker.date.future({ years: 2, refDate: Date.now() })
           )
         }
         case 4: {
           return DateTime.fromJSDate(
-            faker.date.soon({ days: 365, refDate: '2024' })
+            faker.date.soon({ days: 365, refDate: Date.now() })
           )
         }
         case 5: {
           return DateTime.fromJSDate(
-            faker.date.past({ years: 50, refDate: '2025' })
+            faker.date.past({ years: 50, refDate: Date.now() })
           )
         }
         // No default

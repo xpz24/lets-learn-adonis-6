@@ -1,6 +1,9 @@
 import router from '@adonisjs/core/services/router'
 
 const WritersController = () => import('#controllers/writers_controller')
+const DirectorsController = () => import('#controllers/directors_controller')
+const RedisController = () => import('#controllers/redis_controller')
+const MoviesController = () => import('#controllers/movies_controller')
 
 /*
 |--------------------------------------------------------------------------
@@ -10,10 +13,6 @@ const WritersController = () => import('#controllers/writers_controller')
 | The routes file is used for defining the HTTP routes.
 |
 */
-
-const DirectorsController = () => import('#controllers/directors_controller')
-const RedisController = () => import('#controllers/redis_controller')
-const MoviesController = () => import('#controllers/movies_controller')
 
 const SLUG_REGEX = /^[\da-z]+(?:-[\da-z]+)*$/
 router.on('/').render('pages/home').as('home')

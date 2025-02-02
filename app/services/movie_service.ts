@@ -1,74 +1,68 @@
-// import fs from 'node:fs/promises'
-// import app from '@adonisjs/core/services/app'
-// import type { MovieFrontMatter } from '@typings/movie'
-// import cache from '#services/cache_service'
-// import customErrorHandler from '#utils/error_helper'
-// import markToHtml from '#utils/markdown_to_html'
-// import { verifyObjectType } from '#utils/others'
+import { Exception } from '@adonisjs/core/exceptions'
+import type { GetMovieOptions, GetMoviesOptions } from '@typings/movie'
 import Movie from '#models/movie'
 
-// eslint-disable-next-line unicorn/no-static-only-class, @typescript-eslint/no-extraneous-class
-export default class MovieService {
-  // TODO: Convert class to an object
-  static movieList = Movie.all()
+const movieService = {
+  getMovies(options?: GetMoviesOptions) {
+    const movieQuery = Movie.query()
 
-  // TODO: Better to create a getMovies function with a scope callback as the argument?
-  // TODO: And filter the data directly on the controller as thats what should be controlling the views
-  static recentlyReleased = Movie.query()
-    .withScopes((scope) => scope.released())
-    .preload('director')
-    .preload('writer')
-    .orderBy('releasedAt', 'desc')
-    .limit(15)
+    if (options) {
+      if (options.scopeFunctionArray) {
+        for (const scopeFunction of options.scopeFunctionArray) {
+          void movieQuery.apply(scopeFunction)
+        }
+      }
 
-  static releasingSoon = Movie.query()
-    .withScopes((scope) => scope.unReleased())
-    .preload('director')
-    .preload('writer')
-    .whereNotNull('releasedAt')
-    .orderBy('releasedAt', 'desc')
-    .limit(10)
+      if (options.preloadArray) {
+        for (const preload of options.preloadArray) {
+          void movieQuery.preload(preload)
+        }
+      }
 
-  static async getMovie(property: string, value: string) {
-    return await Movie.findByOrFail(property, value)
-  }
-  /*static #keysOfFrontmatter: (keyof MovieFrontMatter)[] = ['title', 'summary']
-  static #keysOfMovie: (keyof Movie)[] = [...this.#keysOfFrontmatter, 'slug', 'abstract']
+      if (options.whereNotNullArray) {
+        for (const notNullColumn of options.whereNotNullArray)
+          void movieQuery.whereNotNull(notNullColumn)
+      }
 
-  static async getMovieList(moviesResourceDirectory: string): Promise<Movie[]> {
-    const url = app.makeURL(moviesResourceDirectory)
+      if (options.orderByArray) {
+        void movieQuery.orderBy(options.orderByArray)
+      }
 
-    try {
-      const files = await fs.readdir(url)
-
-      return await Promise.all(
-        files.map((filename) => this.parseMovieFile(Movie.getSlug(filename)))
-      )
-    } catch (error) {
-      customErrorHandler(error, `Could not find the directory: ${moviesResourceDirectory}`)
+      if (options.limit) {
+        void movieQuery.limit(options.limit)
+      }
     }
-  }
 
-  static async getMovie(slug: string) {
-    try {
-      return await this.parseMovieFile(slug)
-    } catch (error) {
-      customErrorHandler(error, `Could not find a movie called ${slug}`)
+    return movieQuery
+  },
+
+  async getMovie(options?: GetMovieOptions) {
+    if (options) {
+      const movie = Movie.query().where(options.property, options.value)
+      if (options.preloadArray) {
+        for (const preload of options.preloadArray) {
+          void movie.preload(preload)
+        }
+      }
+
+      return await movie.firstOrFail()
     }
-  }
 
-  private static async parseMovieFile(slug: string): Promise<Movie> {
-    if (await cache.has(slug)) {
-      const cachedMovie = await cache.get(slug)
-      verifyObjectType<Movie>(cachedMovie, this.#keysOfMovie)
-      // console.log(`Cache hit: ${slug}`)
-      return cachedMovie
+    // ? might be better to have genre scopes when randomizing?
+    // ? logic could be better?
+    // TODO: Do additional research
+    const count = await Movie.query().count('id as total')
+    const total = count[0].$extras.total
+      ? (count[0].$extras.total as number)
+      : 0
+
+    if (total) {
+      const randomOffset = Math.floor(Math.random() * total)
+      return await Movie.query().offset(randomOffset).firstOrFail()
+    } else {
+      throw new Exception('Table has a count of zero')
     }
-    const url = app.makeURL(`resources/movies/${slug}.md`)
-    const { frontmatter, html } = await markToHtml<MovieFrontMatter>(url, {
-      frontmatterKeys: this.#keysOfFrontmatter,
-    })
-
-    return await Movie.createMovieObject(frontmatter, slug, html)
-  }*/
+  },
 }
+
+export default movieService

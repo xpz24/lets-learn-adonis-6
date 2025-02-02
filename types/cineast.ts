@@ -1,14 +1,23 @@
-import type {
-  ExtractModelRelations,
-  RelationSubQueryBuilderContract,
-} from '@adonisjs/lucid/types/relations'
+import type { ExtractModelRelations } from '@adonisjs/lucid/types/relations'
+import type { ModelColumns, OrderBy } from '@typings/model'
+import type { MovieScopeFunction } from '@typings/movie'
 import type Cineast from '#models/cineast'
 import type Movie from '#models/movie'
 
-interface CineastRelationsMap {
-  moviesDirected: RelationSubQueryBuilderContract<typeof Movie>
-  moviesWritten: RelationSubQueryBuilderContract<typeof Movie>
+export interface GetCineastsOptions {
+  relationship: ExtractModelRelations<Cineast>
+  hasScopeArray?: MovieScopeFunction[]
+  countObject?: Record<string, MovieScopeFunction>
+  orderByArray?: OrderBy<typeof Cineast>[]
 }
-
-export type CineastRelationKey = keyof CineastRelationsMap &
-  ExtractModelRelations<Cineast>
+interface PreloadOptions {
+  cineastRelationArray: ExtractModelRelations<Cineast>[]
+  movieRelationArray: ExtractModelRelations<Movie>[]
+  orderByArray: OrderBy<typeof Movie>[]
+  movieScopeArray?: MovieScopeFunction[]
+}
+export interface GetCineastOptions {
+  property: ModelColumns<typeof Cineast>
+  value: string
+  preloadOptions?: PreloadOptions
+}

@@ -12,7 +12,6 @@ export default {
   quoteProps: 'consistent',
   bracketSpacing: true,
   arrowParens: 'always',
-  // printWidth: 100,
   plugins: [
     '@ianvs/prettier-plugin-sort-imports',
     'prettier-plugin-tailwindcss',

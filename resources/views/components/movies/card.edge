@@ -3,22 +3,47 @@
 <div class="movie-card-border">
   <div class="movie-image-container">
     <img
-      {{-- src="https://picsum.photos/200?v={{ movie.slug }}" --}}
       src="{{ movie.posterUrl }}"
       loading="lazy"
       alt="{{ movie.slug }}"
       class="movie-image"
+      {{-- src="https://picsum.photos/200?v={{ movie.slug }}" --}}
     />
   </div>
   <div class="movie-text-container">
     <h2 class="movie-title">
       {{ movie.title }}
     </h2>
+    <dl class="movie-meta-extras">
+    @if(showDirector)
+      <dt>
+        Director:
+      </dt>
+      <dd>
+      <a href="{{ route('directors.show', {id: movie.director.id}) }}">
+        {{ movie.director.fullName }}
+      </a>
+      </dd>
+    @end
+    @if(showWriter) 
+      <dt>
+        Writer:
+      </dt>
+      <dd>
+      <a href="{{ route('writers.show', {id: movie.writer.id}) }}">
+        {{ movie.writer.fullName }}
+      </a>
+      </dd>
+    @end
+      <dt>
+        Release:
+      </dt>
+      <dd>
+        {{ movie.releasedAt?.toFormat('yyyy | LLLL') ?? 'Coming Soon' }}
+      </dd>
+    </dl>
     <p class="movie-summary">
       {{ truncate(movie.summary, 50, { completeWords: true }) }}
-    </p>
-    <p class="movie-summary">
-      Release Date: {{ movie.releasedAt?.toFormat('LLLL | yyyy') }}
     </p>
     @button({
       removeExistingStyles: false,
