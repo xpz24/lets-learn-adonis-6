@@ -4,9 +4,10 @@ import {
   beforeCreate,
   belongsTo,
   column,
+  manyToMany,
   scope,
 } from '@adonisjs/lucid/orm'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
 import MovieStatuses from '#enums/movie_statuses'
 import Cineast from '#models/cineast'
 import MovieStatus from '#models/movie_status'
@@ -60,6 +61,25 @@ export default class Movie extends BaseModel {
 
   @belongsTo(() => Cineast, { foreignKey: 'directorId' })
   declare director: BelongsTo<typeof Cineast>
+
+  @manyToMany(() => Cineast, {
+    // * Because of the naming conventions we used, we do not have to explicitly define these properties.
+    pivotTable: 'crew_movies',
+    localKey: 'id',
+    relatedKey: 'id',
+    pivotForeignKey: 'movie_id',
+    pivotRelatedForeignKey: 'cineast_id',
+    pivotTimestamps: true,
+  })
+  declare crewMembers: ManyToMany<typeof Cineast>
+
+  @manyToMany(() => Cineast, {
+    pivotTable: 'cast_movies',
+    // * Eager Loading
+    pivotColumns: ['character_name', 'sort_order'],
+    pivotTimestamps: true,
+  })
+  declare castMembers: ManyToMany<typeof Cineast>
 
   // Hooks
   @beforeCreate()

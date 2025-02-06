@@ -45,3 +45,15 @@ export function deepMerge(...objects: Record<string, unknown>[]) {
 export function getRandomArrayItem<T>(array: T[]) {
   return array[Math.floor(Math.random() * array.length)]
 }
+
+export function getShuffledSplicedArray<T>(array: T[], max = 200, min = 50) {
+  if (max < min || min > array.length || max > array.length) {
+    throw new Error('Max & Min out of bounds')
+  }
+  const shuffled = array.toSorted(() => 0.5 - Math.random())
+  const count = Math.floor(Math.random() * (max - min + 1)) + min
+  return shuffled.splice(
+    Math.floor(Math.random() * shuffled.length) - count + 1,
+    count
+  )
+}
