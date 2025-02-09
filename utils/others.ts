@@ -53,7 +53,7 @@ export function getShuffledSplicedArray<T>(array: T[], max = 200, min = 50) {
   const shuffled = array.toSorted(() => 0.5 - Math.random())
   const count = Math.floor(Math.random() * (max - min + 1)) + min
   return shuffled.splice(
-    Math.floor(Math.random() * shuffled.length) - count + 1,
+    Math.floor(Math.random() * (shuffled.length - count + 1)),
     count
   )
 }

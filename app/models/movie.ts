@@ -70,12 +70,13 @@ export default class Movie extends BaseModel {
     pivotForeignKey: 'movie_id',
     pivotRelatedForeignKey: 'cineast_id',
     pivotTimestamps: true,
+    pivotColumns: ['title', 'sort_order'],
   })
   declare crewMembers: ManyToMany<typeof Cineast>
 
   @manyToMany(() => Cineast, {
     pivotTable: 'cast_movies',
-    // * Eager Loading
+    // * Eager Loading, if lazy loading use Model.related('').query().pivotColumns(['', ''])
     pivotColumns: ['character_name', 'sort_order'],
     pivotTimestamps: true,
   })

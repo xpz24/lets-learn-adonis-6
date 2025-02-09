@@ -15,11 +15,43 @@
     </i>
   </h2>
   @if (movie.abstract)
-    <div class="movie-description">
+    <div class="basic-textbox movie-abstract">
       {{{ movie.abstract }}}
     </div>
   @else
     No Abstract
   @endif
-  {{ inspect(movie) }}
+  <div class="cineast-section">
+    <div class="basic-textbox cast-section">
+      <h2>
+        Cast
+      </h2>
+      @list({
+        removeExistingStyles: false,
+        isOrdered: true,
+      })
+        @each(member in movie.castMembers)
+          <li>
+          {{ member.fullName }} as {{ member.$extras.pivot_character_name }}
+          </li>
+        @end
+      @end
+    </div>
+    <div class="basic-textbox crew-section">
+      <h2>
+        Crew
+      </h2>
+      @list({
+        removeExistingStyles: false,
+        isOrdered: true,
+      })
+        @each(member in movie.crewMembers)
+          <li>
+          {{ member.fullName }} as {{ member.$extras.pivot_title }}
+          </li>
+        @end
+      @end
+    </div>
+  </div>
+  {{ inspect(movie.castMembers[58]) }}
 @end

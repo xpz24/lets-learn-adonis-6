@@ -1,5 +1,6 @@
 import type { BaseModel } from '@adonisjs/lucid/orm'
-import type { LucidModel } from '@adonisjs/lucid/types/model'
+import type { LucidModel, LucidRow } from '@adonisjs/lucid/types/model'
+import type { ExtractModelRelations } from '@adonisjs/lucid/types/relations'
 
 // ? is Exclude or Extract better? I think Exclude cause if this
 // ? type definition works as expected only strings will be left
@@ -21,3 +22,8 @@ export interface OrderBy<T extends LucidModel> {
   order?: 'asc' | 'desc'
   nulls?: 'first' | 'last'
 }
+
+export type ModelRelations<T extends LucidRow> = Exclude<
+  ExtractModelRelations<T>,
+  undefined
+>

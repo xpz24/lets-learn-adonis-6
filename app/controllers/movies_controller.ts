@@ -34,8 +34,9 @@ export default class MoviesController {
     const movie = await movieService.getMovie({
       property: 'slug',
       value: params.slug as string,
-      preloadArray: ['director', 'writer'],
+      preloadArray: ['director', 'writer', 'castMembers', 'crewMembers'],
     })
+
     return await view.render('pages/movies/show', { movie })
   }
 }

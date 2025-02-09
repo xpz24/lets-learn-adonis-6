@@ -1,12 +1,21 @@
-.movie-description {
-  max-inline-size: 50%;
-  padding: 1.875rem;
-  margin-block: 1rem;
-  margin-inline-start: 0.625rem;
-  background-color: rgb(6 21 38);
-  border-radius: 0.625rem;
+.movie-title {
+  /* blank */
+}
 
-  @media (prefers-color-scheme: light) {
-    background-color: lightskyblue;
+.basic-textbox.movie-abstract {
+  max-inline-size: 50%;
+}
+
+.cineast-section {
+  display: block grid;
+  grid-template-columns: 1fr 1fr;
+  max-inline-size: 80%;
+
+  & .basic-textbox.cast-section {
+    /* blank */
+  }
+
+  & .basic-textbox.crew-section {
+    /* blank */
   }
 }

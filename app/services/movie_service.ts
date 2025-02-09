@@ -41,7 +41,21 @@ const movieService = {
       const movie = Movie.query().where(options.property, options.value)
       if (options.preloadArray) {
         for (const preload of options.preloadArray) {
-          void movie.preload(preload)
+          if (preload === 'castMembers' || preload === 'crewMembers') {
+            void movie.preload(
+              preload,
+              (query) =>
+                void query.orderBy([
+                  { column: 'pivot_sort_order', order: 'asc' },
+                  {
+                    column: 'firstName',
+                    order: 'asc',
+                  },
+                ])
+            )
+          } else {
+            void movie.preload(preload)
+          }
         }
       }
 

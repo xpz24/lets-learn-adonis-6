@@ -22,12 +22,12 @@ export default class extends BaseSeeder {
 
   #pivotData(
     cineastInstances: Cineast[],
-    PivotColumns: Record<string, unknown>
+    PivotColumns: () => Record<string, unknown>
   ) {
     return Object.fromEntries(
       getShuffledSplicedArray(cineastInstances).map((cineastInstance) => [
         cineastInstance.id,
-        PivotColumns,
+        PivotColumns(),
       ])
     )
   }
@@ -37,14 +37,18 @@ export default class extends BaseSeeder {
     cineast: Cineast[],
     quantityFromFactory: number
   ) {
-    const castMoviesColumns = {
-      character_name: customFaker.person.fullName(),
-      sort_order: customFaker.number.int({ min: 0, max: 10 }),
+    const castMoviesColumns = () => {
+      return {
+        character_name: customFaker.person.fullName(),
+        sort_order: customFaker.number.int({ min: 0, max: 10 }),
+      }
     }
 
-    const crewMoviesColumns = {
-      title: customFaker.person.jobTitle(),
-      sort_order: customFaker.number.int({ min: 0, max: 10 }),
+    const crewMoviesColumns = () => {
+      return {
+        title: customFaker.person.jobTitle(),
+        sort_order: customFaker.number.int({ min: 0, max: 10 }),
+      }
     }
 
     for (const movie of listOfMovies) {

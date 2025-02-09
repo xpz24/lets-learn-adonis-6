@@ -43,6 +43,7 @@ export default class Cineast extends BaseModel {
     pivotForeignKey: 'cineast_id',
     pivotRelatedForeignKey: 'movie_id',
     pivotTimestamps: true,
+    pivotColumns: ['title', 'sort_order'],
   })
   declare crewMovies: ManyToMany<typeof Movie>
 
